@@ -1,0 +1,4 @@
+meat_type,ph,temperature,moisture,storage_duration,color,texture,label
+Beef,5.8,4,68,2,Bright red,Firm,Fresh
+Chicken,6.4,8,60,6,Pale pink,Slightly soft,Acceptable
+Lamb,7.1,14,48,12,Brownish,Soft,Spoiled

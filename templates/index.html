@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meatwise | Quality Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">M</span><span>meatwise</span></div>
+    <div class="workspace-label">WORKSPACE</div>
+    <nav>
+      <a class="nav-item active" href="#overview" data-page="overview"><span class="nav-icon">⌂</span> Overview</a>
+      <a class="nav-item" href="#analysis" data-page="analysis"><span class="nav-icon">⌁</span> Meat analysis</a>
+      <a class="nav-item" href="#history" data-page="history"><span class="nav-icon">◷</span> Analysis history</a>
+      <a class="nav-item" href="#reports" data-page="reports"><span class="nav-icon">▤</span> Reports</a>
+    </nav>
+    <div class="workspace-label secondary-label">MANAGE</div>
+    <nav>
+      <a class="nav-item" href="#about" data-page="about"><span class="nav-icon">ⓘ</span> About system</a>
+      <a class="nav-item" href="#settings" data-page="settings"><span class="nav-icon">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="support-card"><span class="support-icon">?</span><div><strong>Need a hand?</strong><small>Visit our help center</small></div><span>→</span></div>
+      <div class="profile"><div class="avatar">PKS</div><div><strong>Pragathi K S</strong><small>Quality manager</small></div><span class="more">•••</span></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="mobile-menu" id="menuButton" aria-label="Open navigation">☰</button>
+      <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Overview</strong></div>
+      <div class="top-actions"><button class="icon-button" aria-label="Notifications">♢<i></i></button><div class="top-avatar">PKS</div></div>
+    </header>
+
+    <section class="page active-page" id="overview">
+      <div class="page-heading"><div><p class="eyebrow">MONDAY, 07 SEPTEMBER 2026</p><h1>Good morning, Pragathi <span>✦</span></h1><p class="muted">Here’s your meat quality overview for today.</p></div><button class="primary-button" data-navigate="analysis"><span>＋</span> New analysis</button></div>
+      <div class="metric-grid">
+        <article class="metric-card"><div class="metric-top"><span>Total analyses</span><span class="metric-icon blue">⌁</span></div><strong>1,284</strong><div class="metric-change up">↗ 12.8% <em>vs last month</em></div></article>
+        <article class="metric-card"><div class="metric-top"><span>Fresh meat</span><span class="metric-icon green">✓</span></div><strong>856</strong><div class="metric-change up">↗ 8.4% <em>vs last month</em></div></article>
+        <article class="metric-card"><div class="metric-top"><span>Acceptable</span><span class="metric-icon orange">◐</span></div><strong>312</strong><div class="metric-change neutral">→ 2.1% <em>vs last month</em></div></article>
+        <article class="metric-card"><div class="metric-top"><span>Spoiled meat</span><span class="metric-icon red">!</span></div><strong>116</strong><div class="metric-change down">↘ 4.6% <em>vs last month</em></div></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h2>Analysis overview</h2><p>Quality results over the last 7 days</p></div><select id="chartRange"><option>Last 7 days</option><option>Last 30 days</option></select></div><div class="chart-wrap"><canvas id="overviewChart"></canvas></div><div class="legend"><span><i class="dot fresh"></i>Fresh</span><span><i class="dot acceptable"></i>Acceptable</span><span><i class="dot spoiled"></i>Spoiled</span></div></article>
+        <article class="panel distribution-panel"><div class="panel-heading"><div><h2>Quality distribution</h2><p>Across all analyses</p></div><button class="more-button">•••</button></div><div class="donut-wrap"><canvas id="distributionChart"></canvas><div class="donut-label"><strong>1,284</strong><span>analyses</span></div></div><div class="distribution-list"><div><span><i class="dot fresh"></i>Fresh</span><strong>66.7%</strong></div><div><span><i class="dot acceptable"></i>Acceptable</span><strong>24.3%</strong></div><div><span><i class="dot spoiled"></i>Spoiled</span><strong>9.0%</strong></div></div></article>
+      </div>
+      <div class="section-heading"><div><h2>Recent analyses</h2><p>Latest quality checks from your workspace</p></div><button class="text-button" data-navigate="history">View all <span>→</span></button></div>
+      <div class="table-panel"><table><thead><tr><th>Sample</th><th>Analyzed on</th><th>Quality</th><th>Confidence</th><th>Status</th><th></th></tr></thead><tbody id="recentRows"><tr><td><div class="sample"><span class="sample-image steak"></span><div><strong>Beef tenderloin</strong><small>MW-240907-001</small></div></div></td><td>Today, 09:42 AM</td><td><span class="status fresh-status">Fresh</span></td><td><strong>96.8%</strong></td><td><span class="status completed">Completed</span></td><td><button class="row-menu">•••</button></td></tr><tr><td><div class="sample"><span class="sample-image chicken"></span><div><strong>Chicken breast</strong><small>MW-240907-002</small></div></div></td><td>Today, 09:18 AM</td><td><span class="status acceptable-status">Acceptable</span></td><td><strong>88.4%</strong></td><td><span class="status completed">Completed</span></td><td><button class="row-menu">•••</button></td></tr><tr><td><div class="sample"><span class="sample-image lamb"></span><div><strong>Lamb chops</strong><small>MW-240906-018</small></div></div></td><td>Yesterday, 04:36 PM</td><td><span class="status spoiled-status">Spoiled</span></td><td><strong>94.1%</strong></td><td><span class="status completed">Completed</span></td><td><button class="row-menu">•••</button></td></tr></tbody></table></div>
+    </section>
+
+    <section class="page" id="analysis"><div class="page-heading"><div><p class="eyebrow">QUALITY INTELLIGENCE</p><h1>Analyze a sample</h1><p class="muted">Add an image and quality signals for an instant assessment.</p></div><span class="model-pill"><i></i> Model online</span></div><div class="analysis-layout"><div class="panel form-panel"><div class="panel-heading"><div><h2>Sample details</h2><p>All fields help improve prediction accuracy.</p></div><span class="step">01 / 02</span></div><form id="analysisForm"><label class="upload-zone" id="uploadZone"><input type="file" id="imageInput" accept="image/*"><span class="upload-visual">↑</span><strong>Drop a meat image here</strong><small>or <u>browse from your device</u> · PNG, JPG up to 10MB</small><img id="imagePreview" alt="Selected meat sample"></label><div class="form-grid"><label>pH value<input name="ph" type="number" step="0.1" value="5.8"><small>Ideal range: 5.4 - 6.2</small></label><label>Temperature<input name="temperature" type="number" step="0.1" value="4"><small>Cold chain: below 7 °C</small></label><label>Moisture level<input name="moisture" type="number" step="1" value="68"><small>Recommended: above 62%</small></label><label>Texture<select name="texture"><option>Firm</option><option>Slightly soft</option><option>Soft</option></select><small>Visual and tactile assessment</small></label><label>Color<select name="color"><option>Bright red</option><option>Dark red</option><option>Brownish</option><option>Pale pink</option></select><small>Observed surface color</small></label></div><button class="primary-button analyze-button" type="submit"><span>✦</span> Analyze sample</button></form></div><div class="panel result-preview" id="resultPreview"><div class="empty-result"><div class="result-orb">✦</div><h2>Your analysis result</h2><p>Complete the sample details and run an analysis to see the quality prediction, confidence, and recommendations here.</p></div></div></div></section>
+
+    <section class="page" id="history"><div class="page-heading"><div><p class="eyebrow">YOUR RECORDS</p><h1>Analysis history</h1><p class="muted">Track every quality check in one place.</p></div><button class="secondary-button">↓ Export CSV</button></div><div class="filter-bar"><div class="search-box">⌕ <input placeholder="Search samples or IDs..."></div><select><option>All quality results</option><option>Fresh</option><option>Acceptable</option><option>Spoiled</option></select><select><option>Last 30 days</option><option>Last 90 days</option></select></div><div class="table-panel"><table><thead><tr><th>Sample</th><th>Analyzed on</th><th>Quality</th><th>Confidence</th><th>Status</th><th></th></tr></thead><tbody><tr><td><div class="sample"><span class="sample-image steak"></span><div><strong>Beef tenderloin</strong><small>MW-240907-001</small></div></div></td><td>07 Sep 2026, 09:42 AM</td><td><span class="status fresh-status">Fresh</span></td><td><strong>96.8%</strong></td><td><span class="status completed">Completed</span></td><td>→</td></tr><tr><td><div class="sample"><span class="sample-image chicken"></span><div><strong>Chicken breast</strong><small>MW-240907-002</small></div></div></td><td>07 Sep 2026, 09:18 AM</td><td><span class="status acceptable-status">Acceptable</span></td><td><strong>88.4%</strong></td><td><span class="status completed">Completed</span></td><td>→</td></tr><tr><td><div class="sample"><span class="sample-image lamb"></span><div><strong>Lamb chops</strong><small>MW-240906-018</small></div></div></td><td>06 Sep 2026, 04:36 PM</td><td><span class="status spoiled-status">Spoiled</span></td><td><strong>94.1%</strong></td><td><span class="status completed">Completed</span></td><td>→</td></tr></tbody></table></div></section>
+
+    <section class="page" id="reports"><div class="page-heading"><div><p class="eyebrow">INSIGHTS & EXPORTS</p><h1>Reports</h1><p class="muted">Turn your analysis data into clear quality reports.</p></div><button class="primary-button" id="generateReport">＋ Generate report</button></div><div class="report-grid"><article class="report-card dark-report"><span class="report-kicker">MONTHLY SUMMARY</span><h2>September quality<br>report</h2><p>1,284 samples analyzed · 66.7% fresh</p><button class="light-button">↓ Download PDF</button><span class="report-decoration">◒</span></article><article class="report-card"><span class="report-kicker">SYSTEM HEALTH</span><h2>Model performance</h2><div class="performance"><strong>94.6%</strong><span>overall accuracy</span></div><div class="progress"><i style="width:94.6%"></i></div><small>Last trained 02 Sep 2026</small></article><article class="report-card"><span class="report-kicker">QUICK VIEW</span><h2>Quality trend</h2><div class="trend-value">+12.8% <span>↗</span></div><p>Fresh samples compared to last month</p><button class="text-button">View analytics →</button></article></div></section>
+
+    <section class="page" id="about"><div class="page-heading"><div><p class="eyebrow">THE PLATFORM</p><h1>Quality, made visible.</h1><p class="muted">Meatwise turns complex quality signals into confident decisions.</p></div></div><div class="about-layout"><div class="about-copy"><p>Meatwise is a data science quality assistant designed for modern food operations. It combines sensory inputs, environmental readings, and machine learning to help teams make faster, more consistent decisions about meat freshness.</p><div class="tech-list"><span>Python + Flask</span><span>Scikit-learn</span><span>Chart.js</span><span>Computer vision</span></div></div><div class="about-stat"><strong>94.6%</strong><span>model accuracy</span><small>Validated on 12,500+ samples</small></div></div></section>
+    <section class="page" id="settings"><div class="page-heading"><div><p class="eyebrow">WORKSPACE PREFERENCES</p><h1>Settings</h1><p class="muted">Manage notifications and analysis defaults.</p></div></div><div class="panel settings-panel"><div class="setting-row"><div><strong>Email notifications</strong><small>Receive a weekly quality summary</small></div><button class="toggle on"></button></div><div class="setting-row"><div><strong>Automatic reports</strong><small>Generate a report every Monday</small></div><button class="toggle"></button></div><div class="setting-row"><div><strong>Model confidence threshold</strong><small>Flag results below this confidence score</small></div><strong class="threshold">85%</strong></div></div></section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
